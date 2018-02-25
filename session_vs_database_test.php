@@ -35,12 +35,19 @@ $start_time = microtime(true);
 
 session_start(); // No more to do I suppose
 
+// But, we want to read a file with a number in it :)
+$number = file_get_contents('number_to_read');
+
 $time_after_session = microtime(true);
 
 $data = Data::getTwentyLinesOfData($_SQL);
 
 $final_after_sql = microtime(true);
 
+session_destroy();
+
 echo 'Durée de récupération de la session : ' . ($time_after_session - $start_time) . '<br />';
-echo 'Durée de récupération dans la BDD : ' . ($final_after_sql - $time_after_session) . '<br />';
+echo 'Durée de récupération dans la BDD : ' . ($final_after_sql - $time_after_session) . '<br /><br />';
+
+echo '<a href="session_vs_database_index.php">Retour à l\'index</a>';
 ?>
